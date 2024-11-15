@@ -1,0 +1,92 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-table-Customers" author="ekukarskiy">
+        <createTable tableName="customers">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="text"/>
+            <column name="surname" type="text"/>
+            <column name="age" type="int"/>
+            <column name="phone_number" type="text"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-Orders" author="ekukarskiy">
+        <createTable tableName="orders">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="date"/>
+            <column name="customer_id" type="int">
+                <constraints foreignKeyName="orders_customer_id_customers_id" references="customers(id)"/>
+            </column>
+            <column name="product_name" type="text"/>
+            <column name="amount" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="insert-initial-data-customers" author="ekukarskiy">
+        <insert tableName="customers">
+            <column name="id" value="1"/>
+            <column name="name" value="Вячеслав"/>
+            <column name="surname" value="Лутошкин"/>
+            <column name="age" value="35"/>
+            <column name="phone_number" value="89256541256"/>
+        </insert>
+        <insert tableName="customers">
+            <column name="id" value="2"/>
+            <column name="name" value="Генрих"/>
+            <column name="surname" value="Прошин"/>
+            <column name="age" value="31"/>
+            <column name="phone_number" value="89256541251"/>
+        </insert>
+        <insert tableName="customers">
+            <column name="id" value="3"/>
+            <column name="name" value="Вячеслав"/>
+            <column name="surname" value="Зарин"/>
+            <column name="age" value="35"/>
+            <column name="phone_number" value="89256541256"/>
+        </insert>
+        <insert tableName="customers">
+            <column name="id" value="4"/>
+            <column name="name" value="Николай"/>
+            <column name="surname" value="Щеткин"/>
+            <column name="age" value="35"/>
+            <column name="phone_number" value="89256541256"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-initial-data-orders" author="ekukarskiy">
+        <insert tableName="orders">
+            <column name="id" value="1"/>
+            <column name="date" value="2024-10-26"/>
+            <column name="customer_id" value="1"/>
+            <column name="product_name" value="notebook"/>
+            <column name="amount" value="100000"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" value="2"/>
+            <column name="date" value="2024-10-26"/>
+            <column name="customer_id" value="2"/>
+            <column name="product_name" value="personal computer"/>
+            <column name="amount" value="50000"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" value="3"/>
+            <column name="date" value="2024-10-26"/>
+            <column name="customer_id" value="2"/>
+            <column name="product_name" value="phone"/>
+            <column name="amount" value="100000"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" value="4"/>
+            <column name="date" value="2024-10-26"/>
+            <column name="customer_id" value="4"/>
+            <column name="product_name" value="playstation"/>
+            <column name="amount" value="53000"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
